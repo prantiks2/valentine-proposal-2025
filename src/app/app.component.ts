@@ -37,10 +37,10 @@ export class AppComponent {
     { question: "What was Popo and Lolo's first date like at the Ghats?", options: ["Magical ✨", "Cute & Awkward 😆", "The best day ever 💖", "Relaxing 😌"] },
     { question: "What’s Popo's favorite thing about Lolo?", options: ["The way Lolo shruggs Popo off when she is angry 💕", "Lolo's smile 😊", "The way Lolo becomes a baby 🥰"] },
     { question: "What was the funniest thing that happened when Popo's parents came to know about Lolo?", options: ["The way Popo embarrassed himself 😂", "Popo's excuses to his parents 🤣", "Popo's parents reactions 😜"] },
-    { question: "Which of Popo's nicknames for Lolo is hes favorite?", options: ["Smarty Pants 🥰", "Tuturi 😘", "Lolo 💖"] },
+    { question: "Which of Popo's nicknames for Lolo is his favorite?", options: ["Smarty Pants 🥰", "Tuturi 😘", "Lolo 💖"] },
     { question: "What song reminds Lolo of Popo?", options: ["Ekta Chele by Sahana 🎶", "Kotha Koiyo Na (Coke Studio Bangla) ❤️", "Apna Bana Le from Bhediya 💑"] },
     { question: "If Popo had to surprise Lolo with food, what would make Lolo the happiest?", options: ["Lolo's favorites like momo 🥟, cake 🍰, chocolate 🍫", "A romantic date at any fancy restaurant 🍽️", "Breakfast in bed 😍", "A dinner date at home 🏠"] },
-    { question: "How does Lolo feels when Popo and Lolo hug?", options: ["Safe & happy 🤗", "Like she never want to let go 💞", "Butterflies every time 🦋"] },
+    { question: "How does Lolo feel when Popo and Lolo hug?", options: ["Safe & happy 🤗", "Like she never want to let go 💞", "Butterflies every time 🦋"] },
     { question: "Which moment with Popo made Lolo's heart skip a beat?", options: ["When Popo proposed Lolo at the ghat 💖", "When Popo proposed Lolo at Goa ✨", "When Popo danced for Lolo at their engagement 💑"] }
   ];
   showDarkOverlay: boolean = false;
