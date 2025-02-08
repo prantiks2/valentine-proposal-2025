@@ -20,7 +20,7 @@ declare var confetti: any;
 })
 export class AppComponent {
 
-
+  playAudio = false;
   bgMusic = viewChild<ElementRef<HTMLAudioElement>>('bgMusic');
   click = viewChild<ElementRef<HTMLAudioElement>>('bgClick');
   error = viewChild<ElementRef<HTMLAudioElement>>('bgError');
@@ -61,7 +61,9 @@ export class AppComponent {
     effect(() => {
       if (this.bgMusic()) {
         this.bgMusic()!.nativeElement.volume = 0.3;
+        this.playAudio = true;
         this.bgMusic()!.nativeElement.play().catch(error => {
+          this.playAudio = false;
           console.log("Auto-play blocked, waiting for user interaction.");
         });
       }
@@ -72,6 +74,19 @@ export class AppComponent {
         this.error()!.nativeElement.volume = 0.5;
       }
     });
+  }
+
+  toggleAudio() {
+    this.playAudio = !this.playAudio;
+    if (this.bgMusic()) {
+      if (this.playAudio) {
+        this.bgMusic()!.nativeElement.play().catch(error => {
+          console.log("Auto-play blocked, waiting for user interaction.");
+        });
+      } else {
+        this.bgMusic()!.nativeElement.pause();
+      }
+    }
   }
 
 

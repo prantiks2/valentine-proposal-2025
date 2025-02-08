@@ -15,6 +15,14 @@
 }
 
 <div class="container">
+    <span (click)="toggleAudio()" class="audio-btn">
+      @if (playAudio) {
+        <img src="music_off.png" alt="audio-off">
+      }
+      @if (!playAudio) {
+        <img src="music_on.png" alt="audio-on">
+      }
+    </span>
   @if (!quizStarted) {
     <div class="welcome-screen">
       <h1 class="title">❤️ The Popo Lolo Quiz ❤️</h1>
