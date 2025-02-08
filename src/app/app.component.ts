@@ -4,6 +4,10 @@ import { trigger, transition, style, animate } from '@angular/animations';
 
 declare var confetti: any;
 
+interface RequestText {
+  text: string;
+  used: boolean;
+}
 @Component({
   selector: 'app-root',
   imports: [],
@@ -42,17 +46,55 @@ export class AppComponent {
   showDarkOverlay: boolean = false;
   typingText: string = "";
   shakeButton: boolean = false;
-  requestTexts = [
-    { text: "Oops! I think you pressed the wrong button. Try again. 😉", used: false },
-    { text: "Hmm… Seems like there’s a glitch. Let’s fix that with a YES!", used: false },
-    { text: "Let me ask in a different way... If I give you chocolates 🍫, will you say yes?", used: false },
-    { text: "What if I get on one knee? Just imagine… now say YES!", used: false },
-    { text: "Think of all the fun we’ll have. You sure you want to say no? Try again!", used: false },
-    { text: "I’ll keep asking until you give the right answer. ❤️", used: false },
-    { text: "You wouldn’t break my heart… right? Give it one more shot. 😘", used: false },
-    { text: "You do know there’s only one way out of this, right? A big YES!", used: false },
-    { text: "Saying no isn't allowed in this game… Let's try again!", used: false }
-  ];
+
+  requestTexts: RequestText[] = [];
+
+  beginnings = [
+    "Oops! Wrong button. 😉",
+    "Uh-oh! That’s not right. 💖",
+    "Wait, try again! ✨",
+    "Breaking news: ‘No’ is broken!",
+    "Cupid rejects your ‘No’! 💘",
+    "Hmmm… think again. 😏",
+    "Final answer? Nope! 🤨",
+    "Your heart says ‘YES’! 💓",
+    "Plot twist: You meant ‘YES’! 😲",
+    "‘No’ steals your chocolates! 🍫",
+    "That’s a ‘Yes’ in disguise! 😜"
+];
+
+middles = [
+    "Try again! 😉",
+    "Let’s fix that! ❤️",
+    "What about chocolates? 🍫",
+    "Think of the fun!",
+    "You owe me hugs now! 🤗",
+    "A puppy is sad. 🐶",
+    "Say ‘Yes’, get pizza! 🍕",
+    "You can’t escape YES! 😏",
+    "Movie night for ‘Yes’? 🎬",
+    "Love only accepts ‘Yes’! 😆",
+    "Are you sure? 🧐"
+];
+
+endings = [
+    "One more try! 😘",
+    "Say ‘Yes’ = Happy us! 💖",
+    "Puppy eyes incoming! 🥺",
+    "Pinkie promise? 💕",
+    "Rules say YES only! 😆",
+    "Date plans await! 😍",
+    "Say ‘Yes’, get a secret! 🤫",
+    "‘Yes’ unlocks surprises! 🎁",
+    "A ‘Yes’ makes it perfect! 🌟",
+    "I saw a ‘Yes’ in you!",
+    "Let’s fix that mistake! 😍"
+];
+
+names = ["Sweetheart", "Love", "Cutie", "Pumpkin", "My Queen", "Sunshine", "Angel", "Baby", "Babe", "Honeybee"];
+
+usedResponses = new Set<string>();
+
   isTyping: boolean = false;
 
   showSurpriseMessage = false;
@@ -74,13 +116,16 @@ export class AppComponent {
         this.error()!.nativeElement.volume = 0.5;
       }
     });
+    this.generateResponses();
   }
 
   toggleAudio() {
     this.playAudio = !this.playAudio;
     if (this.bgMusic()) {
       if (this.playAudio) {
+        this.playAudio = true;
         this.bgMusic()!.nativeElement.play().catch(error => {
+          this.playAudio = false;
           console.log("Auto-play blocked, waiting for user interaction.");
         });
       } else {
@@ -133,6 +178,23 @@ export class AppComponent {
   
   }
 
+  generateResponses() {
+    while (this.requestTexts.length < 10000) {
+      const randomName = this.names[Math.floor(Math.random() * this.names.length)];
+  
+      const beginning = this.beginnings[Math.floor(Math.random() * this.beginnings.length)];
+      const middle = this.middles[Math.floor(Math.random() * this.middles.length)];
+      const ending = this.endings[Math.floor(Math.random() * this.endings.length)];
+  
+      const response = `Hey ${randomName}, ${beginning} ${middle} ${ending} `;
+  
+      if (!this.usedResponses.has(response)) {
+        this.usedResponses.add(response);
+        this.requestTexts.push({ text: response, used: false });
+      }
+  }
+}
+
   getRequestText(): string {
     const unusedTexts = this.requestTexts.filter(text => !text.used);
 
@@ -158,7 +220,11 @@ export class AppComponent {
     if (this.bgMusic()) {
       this.bgMusic()!.nativeElement.pause(); // Stop background music
       this.bgMusic()!.nativeElement.src = "music/audio-2.mp3"; // Load a new song
-      this.bgMusic()!.nativeElement.play(); // Play the romantic song
+      this.playAudio = true;
+      this.bgMusic()!.nativeElement.play().catch(error => {
+        this.playAudio = false;
+        console.log("Auto-play blocked, waiting for user interaction.");
+      }); // Play the romantic song
     }
   }
 
@@ -166,7 +232,11 @@ export class AppComponent {
     if (this.bgMusic()) {
       this.bgMusic()!.nativeElement.pause(); // Stop background music
       this.bgMusic()!.nativeElement.src = "music/audio-3.mp3"; // Load a new song
-      this.bgMusic()!.nativeElement.play(); // Play the romantic song
+      this.playAudio = true;
+      this.bgMusic()!.nativeElement.play().catch(error => {
+        this.playAudio = false;
+        console.log("Auto-play blocked, waiting for user interaction.");
+      }); // Play the romantic song
     }
   }
 
@@ -174,7 +244,11 @@ export class AppComponent {
     if (this.bgMusic()) {
       this.bgMusic()!.nativeElement.pause(); // Stop background music
       this.bgMusic()!.nativeElement.src = "music/audio-4.mp3"; // Load a new song
-      this.bgMusic()!.nativeElement.play(); // Play the romantic song
+      this.playAudio = true;
+      this.bgMusic()!.nativeElement.play().catch(error => {
+        this.playAudio = false;
+        console.log("Auto-play blocked, waiting for user interaction.");
+      }); // Play the romantic song
     }
   }
 
@@ -182,7 +256,11 @@ export class AppComponent {
     if (this.bgMusic()) {
       this.bgMusic()!.nativeElement.pause(); // Stop background music
       this.bgMusic()!.nativeElement.src = "music/audio-5.mp3"; // Load a new song
-      this.bgMusic()!.nativeElement.play(); // Play the romantic song
+      this.playAudio = true;
+      this.bgMusic()!.nativeElement.play().catch(error => {
+        this.playAudio = false;
+        console.log("Auto-play blocked, waiting for user interaction.");
+      }); // Play the romantic song
     }
   }
 
