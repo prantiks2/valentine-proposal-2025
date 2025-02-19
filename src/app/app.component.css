@@ -1,5 +1,5 @@
 .container {
-    text-align: center;
+    text-align: center; 
     background: linear-gradient(to bottom, #FFC1CC, #FFFFFF);
     min-height: 100vh;
     display: flex;
